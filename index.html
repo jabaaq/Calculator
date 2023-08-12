@@ -11,7 +11,11 @@
 <body>
 
     <div class="calc-box">
-        <span class="div" id="answer"></span>
+        <div class="calc-display">
+            <div id="previous-number"></div>
+            <div id="current-number"></div>
+        </div>
+        <!-- <div id="previous-number"></div> -->
         <!-- <input type="text" name="input" value="0" id="answer"> -->
         <div class="main-buttons">
             <input type="button" class="number-buttons" name="one" id="one" value="1">
@@ -31,7 +35,7 @@
             <br>
             <input type="button" name="Clear" id="clear" value="C">
             <input type="button" class="number-buttons" name="zero" id="zero" value="0">
-            <input type="button" name="equals" id="equals" value="=">
+            <input type="button" name="equals" id="equal" value="=">
             <input type="button" class="operator" name="divide" id="divide" value="/">
             <br>
         </div>

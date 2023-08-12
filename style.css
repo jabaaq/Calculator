@@ -5,6 +5,7 @@ body {
     justify-content: center;
     min-height: 100vh;
     align-items: center;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .calc-box {
@@ -30,10 +31,10 @@ input[type="button"] {
     border: 4px;
 }
 
-#answer {
+.calc-display {
     display: flex;
     justify-content: end;
-    align-items: center;
+    flex-direction: column;
     position: relative;
     width: 280px;
     height: 60px;
@@ -47,9 +48,19 @@ input[type="button"] {
     left: 10px;
 }
 
-#plus {
-    background-color: #efff93;
+#previous-number {
+    font-size: 15px;
+    padding: 5px 3px;
 }
+
+#current-number {
+    color: #000000;
+}
+
+#previous-number {
+    color: #323231;
+}
+
 
 #minus {
     background-color: #efff93;
