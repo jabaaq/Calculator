@@ -61,6 +61,9 @@ input[type="button"] {
     color: #323231;
 }
 
+#plus {
+    background-color: #efff93;
+}
 
 #minus {
     background-color: #efff93;

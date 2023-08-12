@@ -10,10 +10,10 @@ const currentDisplayNum = document.getElementById('current-number');
 const previousDisplayNum = document.getElementById('previous-number');
 
 equalBtn.addEventListener('click', calculate);
-clearBtn.addEventListener('click', clearCalculator);
+clearBtn.addEventListener('click', clearCalc);
 
 let currentNum = '';
-let perviousNum = '';
+let previousNum = '';
 let operator = '';
 
 numbersBtn.forEach(number => {
@@ -24,6 +24,10 @@ numbersBtn.forEach(number => {
 
 
 function numbersShow(number) {
+    if (previousNum !== '' && currentNum !== '' && operator === '') {
+        previousNum = ''
+        currentDisplayNum.textContent = currentNum;
+    }
     if (currentNum.length <= 17) {
         currentNum += number;
         currentDisplayNum.textContent = currentNum;
@@ -38,91 +42,64 @@ operatorsBtns.forEach(btn => {
 
 
 function operatorShow(op) {
+    calculate();
     operator = op;
-    perviousNum = currentNum;
-    previousDisplayNum.textContent = perviousNum + ' ' + operator;
-    currentNum = '';
-    currentDisplayNum.textContent = '';
+    currentDisplayNum.textContent = '0';
+    previousDisplayNum.textContent = previousNum + ' ' + operator + ' ';
 }
 
+// function checkOperator(check) {
+//     operator = check;
+//     previousDisplayNum.textContent = previousNum + ' ' + operator;
+//     // currentDisplayNum.textContent = '0';
+//     currentNum = '';
+// }
+
 function calculate() {
-    perviousNum = Number(perviousNum);
+    previousNum = Number(previousNum);
     currentNum = Number(currentNum);
 
     if (operator === '+') {
-        perviousNum += currentNum;
+        previousNum += currentNum;
     } else if (operator === '-') {
-        perviousNum -= currentNum;
+        previousNum -= currentNum;
     } else if (operator === '*') {
-        perviousNum *= currentNum;
+        previousNum *= currentNum;
     } else if (operator === '/') {
-        perviousNum /= currentNum;
+        previousNum /= currentNum;
     }
+    previousNum = roundNumbers(previousNum);
+    previousNum = previousNum.toString();
+    currentDisplayNum.textContent = previousNum;
     showResult();
-
 }
+
+
+function roundNumbers(number) {
+    return Math.round(number * 100000) / 100000;
+}
+
 
 function showResult() {
-    perviousNum = perviousNum.toString();
-    perviousNum = Math.round(perviousNum * 10000000) / 10000000;
+    if (previousNum.length <= 11) {
+        currentDisplayNum.textContent = previousNum;
+    } else {
+        currentDisplayNum.textContent = previousNum.slice(0, 11) + '...'
+    }
+
     previousDisplayNum.textContent = '';
-    currentDisplayNum.textContent = perviousNum;
+    operator = '';
+    currentNum = '';
 }
 
 
-function clearCalculator() {
+function clearCalc() {
     currentNum = '';
-    perviousNum = '';
+    previousNum = '';
     operator = '';
     currentDisplayNum.textContent = '';
     previousDisplayNum.textContent = '';
 }
-
-
-
-
-
-// function clearDisplay() {
-//     clearBtn.addEventListener('click', () => {
-//         answerDisplay.textContent = '';
-//     })
-// }
-
-// clearDisplay();
-
-
-
-
-// function add(num1, num2) {
-//     return num1 + num2;
-// }
-
-// function sub(num1, num2) {
-//     return num1 - num2;
-// }
-
-// function multiply(num1, num2) {
-//     return num1 * num2;
-// }
-
-// function divide(num1, num2) {
-//     return num1 / num2;
-// }
-
-
-
-// function operate(num1, num2, operator) {
-//     switch (operator) {
-//         case '+':
-//             return add(num1, num2)
-//         case '-':
-//             return sub(num1, num2)
-//         case '*':
-//             return multiply(num1, num2)
-//         case '/':
-//             return divide(num1, num2);
-//     }
-// }
 
 
 
