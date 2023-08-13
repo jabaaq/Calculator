@@ -67,8 +67,11 @@ document.addEventListener('keydown', (e) => {
 document.addEventListener('keydown', (e) => {
     if (e.code === 'Equal') {
         showResult();
+    } else if (e.code === 'Delete') {
+        clearCalc();
     }
 })
+
 
 
 
