@@ -23,6 +23,55 @@ numbersBtn.forEach(number => {
 })
 
 
+document.addEventListener('keydown', (e) => {
+    if (e.code === 'Digit1') {
+        numbersShow(1)
+    } else if (e.code === 'Digit2') {
+        numbersShow(2)
+    } else if (e.code === 'Digit3') {
+        numbersShow(3)
+    } else if (e.code === 'Digit4') {
+        numbersShow(4)
+    } else if (e.code === 'Digit5') {
+        numbersShow(5)
+    } else if (e.code === 'Digit6') {
+        numbersShow(6)
+    } else if (e.code === 'Digit7') {
+        numbersShow(7);
+    } else if (e.code === 'Digit8') {
+        numbersShow(8);
+    } else if (e.code === 'Digit9') {
+        numbersShow(9)
+    } else if (e.code === 'Digit0') {
+        numbersShow(0)
+    } else if (e.code === 'Slash') {
+
+    }
+})
+
+const operatorKeys = {
+    'Slash': '/',
+    'KeyA': '+',
+    'KeyS': '-',
+    'KeyM': '*',
+    'Equal': '='
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.code in operatorKeys) {
+        operatorShow(operatorKeys[e.code])
+    }
+})
+
+
+document.addEventListener('keydown', (e) => {
+    if (e.code === 'Equal') {
+        showResult();
+    }
+})
+
+
+
 function numbersShow(number) {
     if (previousNum !== '' && currentNum !== '' && operator === '') {
         previousNum = ''
@@ -40,20 +89,26 @@ operatorsBtns.forEach(btn => {
     })
 })
 
-
 function operatorShow(op) {
-    calculate();
-    operator = op;
-    currentDisplayNum.textContent = '0';
-    previousDisplayNum.textContent = previousNum + ' ' + operator + ' ';
+    if (previousNum === "") {
+        previousNum = currentNum;
+        checkOperator(op);
+    } else if (currentNum === "") {
+        checkOperator(op);
+    } else {
+        calculate();
+        operator = op;
+        currentDisplayNum.textContent = "0";
+        previousDisplayNum.textContent = previousNum + " " + operator;
+    }
 }
 
-// function checkOperator(check) {
-//     operator = check;
-//     previousDisplayNum.textContent = previousNum + ' ' + operator;
-//     // currentDisplayNum.textContent = '0';
-//     currentNum = '';
-// }
+function checkOperator(check) {
+    operator = check;
+    previousDisplayNum.textContent = previousNum + ' ' + operator;
+    currentDisplayNum.textContent = '0';
+    currentNum = '';
+}
 
 function calculate() {
     previousNum = Number(previousNum);
@@ -66,7 +121,12 @@ function calculate() {
     } else if (operator === '*') {
         previousNum *= currentNum;
     } else if (operator === '/') {
-        previousNum /= currentNum;
+        if (currentNum <= 0) {
+            previousNum = 'Error'
+            showResult()
+            return
+        }
+        previousNum /= currentNum
     }
     previousNum = roundNumbers(previousNum);
     previousNum = previousNum.toString();
@@ -102,5 +162,7 @@ function clearCalc() {
 }
 
 
-
+function backSpace(num) {
+    num.slice(0, num.length - 1)
+}
 

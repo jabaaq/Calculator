@@ -16,6 +16,7 @@ body {
     text-align: center;
     padding-bottom: 1px;
     justify-content: space-evenly;
+    border-radius: 5px;
 }
 
 input[type="button"] {
@@ -29,6 +30,7 @@ input[type="button"] {
     font-size: 20px;
     margin: 5px;
     border: 4px;
+    border-radius: 5px;
 }
 
 .calc-display {
@@ -79,4 +81,25 @@ input[type="button"] {
 
 #clear {
     background-color: #ff939e;
+}
+
+.main-buttons input:hover {
+    background: #b59cf5;
+    color: white;
+}
+
+.number-buttons:active {
+    top: 17px;
+}
+
+.operator:active {
+    top: 17px;
+}
+
+#clear:active {
+    top: 17px;
+}
+
+#equal:active {
+    top: 17px;
 }
